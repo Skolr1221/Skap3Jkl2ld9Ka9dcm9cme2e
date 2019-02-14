@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs");
+const prefix = "-";
 var stopReacord = true;
 var reactionRoles = [];
 var definedReactionRole = null;
@@ -11,7 +12,6 @@ const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const getYoutubeID = require('get-youtube-id');
-const prefix "-";
 
 
 client.on('ready', () => {
