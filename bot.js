@@ -1,13 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs");
-let prefixes = JSON.parse(fs.readFileSync("./prefix.json", "utf8"));
-let spread = JSON.parse(fs.readFileSync('./spread.json' , 'utf8'));
 var stopReacord = true;
 var reactionRoles = [];
 var definedReactionRole = null;
 const config = require('./config.json');
-const reply = JSON.parse(fs.readFileSync('./replys.json' , 'utf8'));
 const ms = require("ms");
 const fetchVideoInfo = require('youtube-info');
 const YouTube = require('simple-youtube-api');
@@ -15,7 +12,7 @@ const ytdl = require('ytdl-core');
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const getYoutubeID = require('get-youtube-id');
 const zalgo = require('zalgolize');
-const voice = JSON.parse(fs.readFileSync("./voicerank.json", "utf8"));
+var prefix= "-";
 
 
 
