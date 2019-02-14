@@ -11,9 +11,7 @@ const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const getYoutubeID = require('get-youtube-id');
-const zalgo = require('zalgolize');
-const prefix= "-";
-
+const prefix "-";
 
 
 client.on('ready', () => {
@@ -178,237 +176,6 @@ msg.delete();
 
 
 
-//top
-
-client.on('message',async message => {
-  if(message.author.bot || message.channel.type === 'dm') return;
-  let args = message.content.split(' ');
-  let member = message.member;
-  let mention = message.mentions.users.first();
-  let guild = message.guild;
-  let author = message.author;
- 
-  let rPoints = Math.floor(Math.random() * 4) + 1;// Random Points
-  tpoints[author.id].points += rPoints;
-  if(args[0] === `${prefix}top`) {
-    let _voicePointer = 1;
-    let _textPointer = 1;
-    let _voiceArray = Object.values(vpoints);
-    let _textArray = Object.values(tpoints);
-    let _topText = as(_textArray, 'points', { reverse: true });
-    let _topVoice = as(_voiceArray, 'points', { reverse: true });;
-    let topRoyale = new Discord.RichEmbed();
-    topRoyale.setAuthor(message.author.username, message.author.avatarURL);
-    topRoyale.setTitle('^ " top');
-    //topRoyale.setThumbnail(message.guild.iconURL);
-    topRoyale.addField(`**TOP 5 TEXT 💬**`, _topText.map(r => `**\`.${_textPointer++}\` | <@${r.id}> \`XP: ${r.points}\`**`).slice(0, 5), true);
-    topRoyale.addField(`**TOP 5 VOICE 🎙**`, _topVoice.map(r => `**\`.${_voicePointer++}\` | <@${r.id}> \`XP: ${r.points}\`**`).slice(0, 5), true);
-    message.channel.send(topRoyale).catch(e => {
-      if(e) return message.channel.send(`**. Error; \`${e.message}\`**`);
-    });
-  }
-});
-
-//top
-
-
-//prefix
-
-client.on("message", message => {
-    if (!message.channel.guild) return;
-    if (message.author.bot) return;
-    if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-        prefix: '!',
-    };
-    var prefix = prefixes[message.guild.id].prefix;
-    var setp = prefixes[message.guild.id];
-    if (message.content.startsWith(prefix + 'setp')) {
-        if (!message.member.hasPermission(`MANAGE_GUILD`)) return message.reply(`**:x: Error: You do not have the required permissions: Manage Server.**`);
- 
-        let args = message.content.split(" ").slice(1);
- 
-        if (!args.join(" ")) return message.reply(`**:x: Error: Say The Prefix Please.**`);
- 
-        message.channel.send(`** Successfully set the new Prefix to  ${args.join(" ")} **`);
-        setp.prefix = args.join();
- 
-    }
- 
-    fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.error(err);
-    });
-});
-// امر التست
-// كل كود اوله ضيف
-/* if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-        prefix: '!',
-    };
-    var prefix = prefixes[message.guild.id].prefix;*/
-// واخره
-/* fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.error(err);
-    });*/
-client.on('message', message => {
-    if (!message.channel.guild) return;
-    if (message.author.bot) return;
-        if (!prefixes[message.guild.id]) prefixes[message.guild.id] = {
-        prefix: '!',
-    };
-    var prefix = prefixes[message.guild.id].prefix;
-    if (message.content.startsWith(prefix + `ping`)) {
-        return message.channel.send(`Ping : ${Date.now() - message.createdTimestamp}.`);
-    }
-     fs.writeFile("./Database/prefix.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.error(err);
-    });
-});
-//prefix
-
-
-
-//mn3 nsr 
-
-
-client.on('message', message => {
-    if(message.content.startsWith(prefix + "antispread off")) {
-        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
-        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
-spread[message.guild.id] = {
-onoff: 'Off',
-}
-message.channel.send(`**⛔ The AntiSpread Is __𝐎𝐅𝐅__ !**`)
-          fs.writeFile("./spread.json", JSON.stringify(spread), (err) => {
-            if (err) console.error(err)
-            .catch(err => {
-              console.error(err);
-          });
-            });
-          }
- 
-        })
-        client.on('message', message => {
-    if(message.content.startsWith(prefix + "antispread on")) {
-        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
-        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
-spread[message.guild.id] = {
-onoff: 'On',
-}
-message.channel.send(`**✅ The AntiSpread Is __𝐎𝐍__ !**`)
-          fs.writeFile("./spread.json", JSON.stringify(spread), (err) => {
-            if (err) console.error(err)
-            .catch(err => {
-              console.error(err);
-          });
-            });
-          }
- 
-        })
-    client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('http://www.gmail.com/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
-});
- 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('https://www.snapchat.com/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
- 
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
-});
- 
- 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('https://www.instagram.com/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
-});
- 
- 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('https://www.twitter.com/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
-});
- 
- 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('http://www.facebook.com/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
-});
- 
- 
- 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('https://www.youtube.com/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
- 
-});
- 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('https://www.discordapp.com/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
- 
-});
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('https://discord.gg/')){
-            if(!spread[message.guild.id]) spread[message.guild.id] = {
-        onoff: 'Off'
-            }
-        if(spread[message.guild.id].onoff === 'Off') return;
-        message.delete()
-    return message.reply(`**⛔ حماية وضع النشر قيد التشغيل الرجاء عدم النشر لكي لاتتم معاقبتك!**`)
-    }
- 
-});
-
-//mn3 nsr 
-
 //
 client.on('message', message => {
     if(message.content.toLowerCase().startsWith(`discord.gg`)){
@@ -479,6 +246,97 @@ if(!message.channel.guild) return message.reply(' Error : \` Guild Command \`');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+//room mw8t
+client.on('message', async message => {
+ if(message.channel.type === "dm") return;
+  if(message.author.bot) return;
+   if(!temp[message.guild.id]) temp[message.guild.id] = {
+    time: "3000",
+     category : 'click here',
+      channel : 'click here'
+       }
+        if(message.content.startsWith('#temp on')){
+         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+          var ggg= message.guild.createChannel('click here', 'category').then(cg => {
+           var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
+            ch.setParent(cg)
+             message.channel.send('**Done ,**')
+              client.on('message' , message => {
+               if(message.content === '#temp off') {
+                if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                 cg.delete()
+                  ch.delete()
+                   message.channel.send('**Done ,**')
+                    }
+                     });
+                      const time = temp[message.guild.id].time
+                       client.on('message' , message => {
+                        if (message.content.startsWith(prefix + "temptime")) {
+                         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                          let newTime= message.content.split(' ').slice(1).join(" ")
+                          if(!newTime) return message.reply(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
+	                 if(isNaN(newTime)) return message.reply(`** The Time Be Nambers :face_palm: **`);
+	                if(newTime < 1) return message.reply(`**The Time Be Up \`3000s\`**`)
+                       temp[message.guild.id].time = newTime
+                      message.channel.send(`**Temp Rooms Time Change To \`${newTime}\`**`);
+                     }
+                    });
+                   client.on('voiceStateUpdate', (old, neww) => {
+                  let newUserChannel = neww.voiceChannel
+                 let oldUserChannel = old.voiceChannel
+                temp[message.guild.id].category = cg.id
+               temp[message.guild.id].channel = ch.id
+              let channel = temp[message.guild.id].channel
+             let category = temp[message.guild.id].category
+            if(oldUserChannel === undefined && newUserChannel !== undefined && newUserChannel.id == channel) {
+           neww.guild.createChannel(neww.displayName , 'voice').then(c => {
+          c.setParent(category)
+         let scan = setTimeout(()=>{
+        if(!neww.voiceChannel) {
+       c.delete();
+      client.channels.get(channel).overwritePermissions(neww, {
+     CONNECT:true,
+    SPEAK:true
+   })
+  }
+ }, temp[neww.guild.id].time);
+  c.overwritePermissions(neww, {
+   CONNECT:true,
+    SPEAK:true,
+     MANAGE_CHANNEL:true,
+      MUTE_MEMBERS:true,
+       DEAFEN_MEMBERS:true,
+	MOVE_MEMBERS:true,
+	 VIEW_CHANNEL:true
+	  })
+	   neww.setVoiceChannel(c)
+            })
+             client.channels.get(channel).overwritePermissions(neww, {
+	      CONNECT:false,
+	       SPEAK:false
+		})
+               }
+              })
+             })
+           })
+          }
+         fs.writeFile("./temp.json", JSON.stringify(temp), (err) => {
+        if(err) console.error(err)
+       })
+      });
+
+//room mw8t
 
 
 
@@ -2216,30 +2074,6 @@ client.on('ready', function(){
 
 
 
-
-//z5rfh 
-
-
-/*زخرفت الاسم*/
-
-
- client.on('message', message => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-if (command == "zalgo") {
-    let say = new Discord.RichEmbed()
-    .setTitle('Text emboss :');
-  message.reply(`\n ${zalgo(args.join(' '))}`);
-  }
-
-});
-
-//
 
 
 //rankk 
